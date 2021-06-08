@@ -38,6 +38,7 @@ app.post('/api/notes', async (req,res) => {
         newNotesObj.id = Math.random().toString(36).substr(2, 9);
         await notesDB.push(req.body);
         await res.json(notesDB);
+        await console.log(notesDB);
         await fs.writeFile('./db/db.json', JSON.stringify(notesDB) , err => {if (err)
              { return console.log(err)}
             }); 
