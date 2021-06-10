@@ -35,7 +35,6 @@ app.get('/api/notes', async (req,res) => {
 app.post('/api/notes', async (req,res) => {
     try{
         let newNotesObj = req.body;
-        newNotesObj.id = Math.random().toString(36).substr(2, 9);
         await notesDB.push(req.body);
         await res.json(notesDB);
         await console.log(notesDB);
