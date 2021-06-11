@@ -48,6 +48,31 @@ app.post('/api/notes', async (req,res) => {
 })
 
 
+app.delete('/api/notes/:id', async (req, res) => {
+
+
+    try{
+        const id = req.params.id;
+        for(i = 0; i< notesDB.length; i++){
+            if(id === notesDB[i].title){
+                notesDB.splice(i,1);
+                console.log(notesDB);
+            }
+        }
+        await res.json(notesDB);
+        await fs.writeFile('./db/db.json', JSON.stringify(notesDB) , err => {if (err)
+            { return console.log(err)}
+           }); 
+    }
+    catch(error){
+        console.log(error);
+    }
+    
+   
+})
+;
+
+
 /// listens when server is on and logs a confirmation message
 app.listen(PORT, () => {
     console.log(`Server is live!`);
